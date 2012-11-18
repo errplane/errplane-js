@@ -1,9 +1,9 @@
 errplane-js
 ===========
 
-Javscript library for the Errplane API
+Javscript library for the Errplane API.
 
-Just include it in your header:
+Just include it in your head and it'll work with browsers that support CORS:
 
 ```html
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
@@ -20,7 +20,7 @@ errplaneMetrics = new ErrplaneMetrics({
 });
 ```
 
-And now you can instrument DOM elements automatically:
+And now you can instrument DOM elements automatically. Just add the errplane attributes we'll take care of the rest.
 
 ```html
 <!-- Log all clicks on this link to the metric 'clicked_link' -->
