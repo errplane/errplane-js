@@ -42,5 +42,11 @@ errplaneMetrics.time({metricName: "timed_thing", context: "an optional string"},
   // this function will be wrapped and a time in milliseconds will be logged after it completes
 });
 
-errplaneMetrics.report("some_metric_name", {context: "this is a totally optional string that will show up in related alerts"});
+// the value is optional. will default to 1 if you don't include.
+errplaneMetrics.report("some_metric_name",
+  {
+    context: "this is a totally optional string that will show up in related alerts"
+    value: 23
+  }
+);
 ```
