@@ -26,11 +26,11 @@ And now you can instrument DOM elements automatically. Just add the errplane att
 <!-- Log all clicks on this link to the metric 'clicked_link' -->
 <a href="#" data-errplane-click="clicked_link">Click me<a>
 
-<!-- Log all hovers to metric 'hovered_link' -->
-<button href="#" data-errplane-hover="hovered_link">Hover me</button>
+<!-- Log all hovers to metric 'enter_metric_name' -->
+<button href="#" data-errplane-enter="enter_metric_name">Hover me</button>
 
 <!-- Will add the context string that will be included in any Errplane alerts -->
-<a href="#" data-errplane-click="clicked_link" data-errplane-context="any string or json">Click me</a>
+<a href="#" data-errplane-click="clicked_link_and_more" data-errplane-context="any string or json">Click me</a>
 ```
 
 Name the metrics any string with numbers, letters, underscores, or hyphens.
