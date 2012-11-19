@@ -14,7 +14,7 @@ Then put this somewhere in the body
 
 ```javascript
 errplaneMetrics = new ErrplaneMetrics({
-  apiKey: "your api key",
+  apiKey: "your write only api key",
   appKey: "your app key",
   envKey: "development (for example)"
 });
