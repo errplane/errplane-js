@@ -38,8 +38,11 @@ Name the metrics any string with numbers, letters, underscores, or hyphens.
 And you can call it in your javascript to time function calls, or report metrics:
 
 ```javascript
-errplaneMetrics.time({metricName: "timed_thing", context: "an optional string"}, function() {
-  // this function will be wrapped and a time in milliseconds will be logged after it completes
+errplaneMetrics.time("timed_thing", function(finish) {
+  // finish is a function that should be called when the thing
+  // you're timing completes. It's useful to do it this way for
+  // async callbacks where you want to time the entire cycle.
+  finish("an optional string included in any alerts");
 });
 
 // the value is optional. will default to 1 if you don't include.
