@@ -8,6 +8,7 @@ Rake::Minify.new(:package) do
       add("base64.js")
       add("errplane_api.js")
       add("errplane_metrics.js")
+      add("errplane_exceptions.js")
     end
   end
 end

@@ -269,3 +269,14 @@ ErrplaneApi.prototype.alertToReadableDescription = function(alert) {
   }
   return desc;
 }
+
+ErrplaneApi.prototype.postException = function(exceptionData) {
+  var url = this.baseUrl + "api/v1/applications/" + this.appKey + "/exceptions/" + this.envKey + "?api_key=" + this.apiKey;
+  $.ajax({
+    url: url,
+    type: "POST",
+    data: JSON.stringify(exceptionData),
+    processData: false,
+    contentType: "text/plain"
+  });
+}
