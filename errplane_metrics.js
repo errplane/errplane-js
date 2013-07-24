@@ -23,10 +23,10 @@ ErrplaneMetrics.prototype.logEnter = function(ev) {
 
 ErrplaneMetrics.prototype.time = function(metricName, functionToTime) {
   var startTime = new Date() - 0;
-  var that = this;
+  var _this = this;
   var completeTimer = function(context) {
     var endTime = new Date() - 0;
-    that.errplaneApi.report(
+    _this.errplaneApi.report(
       metricName,
       {value: endTime - startTime, context: context}
     );

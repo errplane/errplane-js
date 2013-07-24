@@ -4,7 +4,6 @@ function ErrplaneExceptions(options) {
   this.envKey = options.envKey;
   this.baseUrl = options.baseUrl;
   this.customData = options.customData || {}; // will be included with every exception logged. good place to put user ids.
-  this.customData.browser = $.browser
   this.errplaneApi = new ErrplaneApi(options);
   this.catchOnError();
 }
@@ -12,7 +11,7 @@ function ErrplaneExceptions(options) {
 /* Initializes Errplane to catch all exceptions from window.onerror
 */
 ErrplaneExceptions.prototype.catchOnError = function() {
-  var that = this;
+  var _this = this;
   window.onerror = function(message, file, line) {
     var spaceIndex = message.indexOf(" ")
     var colonIndex = message.indexOf(":")
@@ -28,7 +27,7 @@ ErrplaneExceptions.prototype.catchOnError = function() {
     }
     var backtrace = ["@" + file + ":" + line];
     var timeInSeconds = Math.floor((new Date() - 0) / 1000);
-    var customData = that.customData;
+    var customData = _this.customData;
     customData.url = window.location.href;
 
     var exceptionData = {
@@ -36,11 +35,11 @@ ErrplaneExceptions.prototype.catchOnError = function() {
       exception_class: exceptionClass,
       backtrace: backtrace,
       time: timeInSeconds,
-      language: "Javascript",
+      language: "JavaScript",
       custom_data: customData
     };
 
-    that.errplaneApi.postException(exceptionData);
+    _this.errplaneApi.reportException(exceptionData);
   }
 }
 
@@ -52,8 +51,6 @@ ErrplaneExceptions.prototype.catchOnError = function() {
                    as custom data.
 */
 ErrplaneExceptions.prototype.logToErrplane = function(exception, options) {
-  var hash = options.hash;
-  delete(options.hash);
   var customData = $.extend({}, this.customData, options);
   customData.url = window.location.href;
   var timeInSeconds = Math.floor((new Date() - 0) / 1000);
@@ -63,12 +60,9 @@ ErrplaneExceptions.prototype.logToErrplane = function(exception, options) {
     exception_class: exception.name,
     backtrace: exception.stack.split("\n"),
     time: timeInSeconds,
-    language: "Javascript",
+    language: "JavaScript",
     customData: customData
   };
-  if (hash) {
-    exceptionData.hash = hash;
-  }
 
-  this.errplaneApi.postException(exceptionData);
+  this.errplaneApi.reportException(exceptionData);
 }
