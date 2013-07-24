@@ -227,8 +227,6 @@ ErrplaneApi.prototype.report = function(timeSeriesName, options, callback) {
   var url = this.baseUrl + "api/v2/time_series/applications/" + this.appKey + "/environments/" + this.envKey + "?api_key=" + this.apiKey;
   var timeInSeconds = Math.round((new Date() - 0) / 1000);
   var data = timeSeriesName + " " + value + " " + timeInSeconds;
-  if (options.context && options.context !== "") {
-    data += " " + ErrplaneBase64.encode(options.context);
   }
   $.ajax({
     url: url,
