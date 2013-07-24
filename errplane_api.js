@@ -3,7 +3,7 @@ function ErrplaneApi(options) {
   this.appKey = options.appKey;
   this.envKey = options.envKey;
   this.secondsInDay = 86400;
-  this.baseUrl = options.baseUrl || "//api.errplane.com/"
+  this.baseUrl = options.baseUrl || "//w.apiv3.errplane.com/"
 }
 
 /* Returns array of strings that are the time series names that have been written in this application and environment.
@@ -11,7 +11,7 @@ function ErrplaneApi(options) {
  * @returns  ['name1', 'name2', 'name3']
 */
 ErrplaneApi.prototype.getTimeSeriesNames = function(callback) {
-  var url = this.baseUrl + "api/v2/time_series/applications/" + this.appKey + "/environments/" + this.envKey + "?api_key=" + this.apiKey;
+  var url = this.baseUrl + "databases/" + this.appKey + this.envKey + "/series?api_key=" + this.apiKey;
   $.get(url, callback);
 }
 
@@ -225,13 +225,30 @@ ErrplaneApi.prototype.addChangesToLeaderboard = function(data) {
 ErrplaneApi.prototype.report = function(timeSeriesName, options, callback) {
   var value = options.value || 1
   var url = this.baseUrl + "api/v2/time_series/applications/" + this.appKey + "/environments/" + this.envKey + "?api_key=" + this.apiKey;
-  var timeInSeconds = Math.round((new Date() - 0) / 1000);
-  var data = timeSeriesName + " " + value + " " + timeInSeconds;
+
+  data = [];
+  point = {};
+
+  point["v"] = options["value"] || 1;
+
+  if (options["timestamp"] != null) {
+    point["t"] = options["timestamp"];
   }
+
+  if (options["context"] != null) {
+    point["c"] = JSON.stringify(options["context"]);
+  }
+
+  if (options["dimensions"] != null) {
+    point["d"] = options["dimensions"];
+  }
+
+  data.push({n: timeSeriesName, p: [point]});
+
   $.ajax({
     url: url,
     type: "POST",
-    data: data,
+    data: JSON.stringify(data),
     processData: false,
     contentType: "text/plain"
   }).done(callback);
@@ -269,7 +286,7 @@ ErrplaneApi.prototype.alertToReadableDescription = function(alert) {
 }
 
 ErrplaneApi.prototype.postException = function(exceptionData) {
-  var url = this.baseUrl + "api/v1/applications/" + this.appKey + "/exceptions/" + this.envKey + "?api_key=" + this.apiKey;
+  var url = this.baseUrl + "databases/" + this.appKey + this.envKey + "series/exceptions?api_key=" + this.apiKey;
   $.ajax({
     url: url,
     type: "POST",
