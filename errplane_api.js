@@ -48,8 +48,8 @@ ErrplaneApi.prototype.reportException = function(exceptionData) {
     context: JSON.stringify(exceptionData),
     dimensions: {
       host: "browser",
-      browser: BrowserData.browser + " " + BrowserData.version,
-      browser_os: BrowserData.OS
+      browser: BrowserDetect.browser + " " + BrowserDetect.version,
+      browser_os: BrowserDetect.OS
     }
   })
 }
