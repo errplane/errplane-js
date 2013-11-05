@@ -47,6 +47,7 @@ ErrplaneApi.prototype.reportException = function(exceptionData) {
   this.report("exceptions", {
     context: JSON.stringify(exceptionData),
     dimensions: {
+      class: exceptionData.exception_class,
       host: "browser",
       browser: BrowserData.browser + " " + BrowserData.version,
       browser_os: BrowserData.OS

@@ -61,7 +61,7 @@ ErrplaneExceptions.prototype.logToErrplane = function(exception, options) {
     backtrace: exception.stack.split("\n"),
     time: timeInSeconds,
     language: "JavaScript",
-    customData: customData
+    custom_data: customData
   };
 
   this.errplaneApi.reportException(exceptionData);
