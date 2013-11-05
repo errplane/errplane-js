@@ -7,7 +7,7 @@ Just include it in your head and it'll work with browsers that support CORS:
 
 ```html
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-<script src="//s3.amazonaws.com/errplane-public/errplane-min-0.1.0.js"></script>
+<script src="//s3.amazonaws.com/errplane-public/errplane-min-1.0.1.js"></script>
 ```
 
 Then put this somewhere in the body
