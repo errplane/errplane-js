@@ -49,8 +49,8 @@ ErrplaneApi.prototype.reportException = function(exceptionData) {
     dimensions: {
       class: exceptionData.exception_class,
       host: "browser",
-      browser: BrowserData.browser + " " + BrowserData.version,
-      browser_os: BrowserData.OS
+      browser: BrowserDetect.browser + " " + BrowserDetect.version,
+      browser_os: BrowserDetect.OS
     }
   })
 }
